@@ -1,0 +1,23 @@
+name: CI
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '22 4 * * *'
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+jobs:
+    build-image:
+      name: Image
+      permissions:
+        packages: write
+        security-events: write
+        id-token: write
+        contents: read
+      uses: curium-rocks/flows/.github/workflows/oci-build-image.yml@main
+      with:
+        codeql_enabled: true
+        image_name: node-scratch-fips
+        registry: 'ghcr.io/bryopsida'
+        push_in_pr: true
