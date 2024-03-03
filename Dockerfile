@@ -35,10 +35,12 @@ RUN echo "$NODE_VERSION" \
     && export LDFLAGS="-Wl,--gc-sections,--strip-all" \
     && ./configure ${CONFIG_FLAGS} \
     && make -j$(getconf _NPROCESSORS_ONLN) V=
+RUN echo 'node:x:10001:10001:Linux User,,,:/home/node:/bin/sh' > /tmp/passwd
+
 
 FROM scratch
 COPY --from=node_builder node-v*/out/Release/node /bin/node
+COPY --from=node_builder /tmp/passwd /etc/passwd
 ENV OPENSSL_CONF=/etc/nodejs.cnf
 ENV OPENSSL_MODULES=/var/lib/ossl-modules/
-RUN echo 'node:x:10001:10001:Linux User,,,:/home/node:/bin/sh' > /etc/passwd
 USER node
