@@ -25,3 +25,7 @@ RUN echo "$NODE_VERSION" \
 
 FROM scratch
 COPY --from=builder node-v*/out/Release/node /bin/node
+ENV OPENSSL_CONF=/etc/nodejs.cnf
+ENV OPENSSL_MODULES=/var/lib/ossl-modules/
+RUN echo 'node:x:10001:10001:Linux User,,,:/home/node:/bin/sh' > /etc/passwd
+USER node
