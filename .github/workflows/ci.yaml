@@ -12,7 +12,7 @@ jobs:
         name: Build
         env:
           REGISTRY: ghcr.io/bryopsida
-          IMAGE_NAME: node-scratch-fips
+          IMAGE_NAME: node-fips
           CODEQL_ENABLED: true
         permissions:
           contents: read
