@@ -22,7 +22,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v5
           - name: Install cosign
             if: github.event_name != 'pull_request'
             uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159
